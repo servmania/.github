@@ -13,7 +13,7 @@ jobs:
         id: extract_branch
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-      - name: Run the Action
+      - name: Create pull request
         uses: devops-infra/action-pull-request@v0.5.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
