@@ -1,6 +1,8 @@
 name: Init Branch
 on: workflow_call
 
+permissions:
+  pull-requests: write
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
@@ -14,9 +16,5 @@ jobs:
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       - name: Create Pull Request
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: "main"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_label: "auto-generated"
-          pr_title: "chore(merge): Pull request for branch ${{ steps.extract_branch.outputs.branch }}"
+        run: |
+          gh pr create --title "chore(merge): Pull request for branch ${{ steps.extract_branch.outputs.branch }}" --body "Automatic Pull Request, do not edit title" --base main
