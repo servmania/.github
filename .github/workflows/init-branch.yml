@@ -4,6 +4,8 @@ on: workflow_call
 permissions:
   pull-requests: write
   contents: read
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   create-pull-request:
@@ -13,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          github_token: ${{ secrets.MY_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract branch name
         id: extract_branch
         shell: bash
