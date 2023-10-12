@@ -1,0 +1,20 @@
+name: Init Branch
+on: create
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: chore(${{ steps.extract_branch.outputs.branch }})
+          body: This PR was auto-generated, please don't edit title.
+          base: main
+          labels: auto-generated
+          branch: ${{ steps.extract_branch.outputs.branch }}
+          delete-branch: true
