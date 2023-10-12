@@ -13,13 +13,10 @@ jobs:
         id: extract_branch
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@v0.5.5
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
         with:
+          destination_branch: "main"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          target_branch: main
-          title: "chore(merge): Pull request for branch ${{ steps.extract_branch.outputs.branch }}"
-          body: "**Automatic pull request, do not edit title**"
-          label: auto-generated
-          get_diff: false
-          allow_no_diff: true
+          pr_label: "auto-generated"
+          pr_title: "chore(merge): Pull request for branch ${{ steps.extract_branch.outputs.branch }}"
