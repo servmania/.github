@@ -22,4 +22,5 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       - name: Create Pull Request
         run: |
-          gh pr create --draft --title "chore(merge): Pull request for branch ${{ steps.extract_branch.outputs.branch }}" --body "Automatic Pull Request, do not edit title" --base main
+          gh_pr_up() { gh pr create $* || gh pr edit $* }
+          gh_pr_up  --draft --title "chore(merge): Pull request for branch ${{ steps.extract_branch.outputs.branch }}" --body "Automatic Pull Request, do not edit title" --base main
