@@ -1,7 +1,9 @@
 name: Release Node
 on: workflow_call
 
-permissions: write-all
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   release-please:
@@ -11,7 +13,7 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: node
-          package-name: "@servermania/website-components"
+          package-name: "@servmania/website-components"
           labels: |
             autorelease: pending
             automerge
