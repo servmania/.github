@@ -1,12 +1,12 @@
 name: Publish Node (no build)
 on: workflow_call
 
+permissions:
+  contents: read
+  packages: write
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       # Setup .npmrc file to publish to GitHub Packages
