@@ -1,9 +1,7 @@
 name: Release Node
 on: workflow_call
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: write-all
 
 jobs:
   release-please:
