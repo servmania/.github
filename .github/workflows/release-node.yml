@@ -10,10 +10,12 @@ jobs:
     if: github.event.pull_request.merged == true && !contains(github.event.pull_request.labels.*.name,'automerge')
     runs-on: ubuntu-latest
     steps:
+      - name: Info
+        run: echo "Running release-please for ${{ github.event.repository.name }}"
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: node
-          package-name: "@servmania/website-components"
+          package-name: "@servmania/${{ github.event.repository.name }}"
           labels: |
             autorelease: pending
             automerge
