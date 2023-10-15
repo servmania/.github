@@ -1,0 +1,7 @@
+name: "Build Go"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build
+      run: make build
