@@ -17,5 +17,6 @@ jobs:
           package-name: "@servmania/${{ github.event.repository.name }}"
           labels: |
             autorelease: pending
+            release
             automerge
           token: ${{secrets.ORGANIZATION_TOKEN}}
